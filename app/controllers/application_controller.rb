@@ -7,10 +7,18 @@ class ApplicationController < ActionController::API
         
       
           def current_user
-              if auth_token
+            if auth_token
+                @user = User.find_by(email: params[:email])
                 binding.pry
-              end
+                if @user
+                  @user 
+                else
+                  User.new(email: params[:email])
+                end
+            else
+              render json: { message: 'Please log in' }
             end
+          end
           
             def logged_in?
               !!current_user
@@ -20,5 +28,6 @@ class ApplicationController < ActionController::API
           def authorized
               render json: { message: 'Please log in' }, status: :unauthorized unless auth_token
             end
-      end
+     
+        end
       

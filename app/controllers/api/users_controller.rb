@@ -2,7 +2,16 @@ class Api::UsersController < ApplicationController
 
     def create
         binding.pry
-        render json:  { message: 'Test' }
+        user = User.new(user_params)
+    end
+
+    def login
+      @user = User.find(email => params([:email])
+      if @user
+        render json: UserSerializer.new
+      else
+        @user = User.new(user_params)
+        render json: UserSerializer.new
     end
 
     
@@ -21,7 +30,7 @@ class Api::UsersController < ApplicationController
       private
 
       def user_params
-        params.require(:user).permit(:email)
+        params.require(:user).permit(:email, :username, :bio)
     end
 
 end
