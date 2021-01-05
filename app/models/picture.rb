@@ -1,5 +1,13 @@
 class Picture < ApplicationRecord
-    beongs_to :user
+    include Rails.application.routes.url_helpers
+    
+    belongs_to :user
     has_many :likes
-    has_mant :comments
+    has_many :comments
+    has_one_attached :image
+
+    def get_image_url
+        url_for(self.image)
+    end
+
 end

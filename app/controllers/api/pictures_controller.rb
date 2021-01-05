@@ -1,14 +1,11 @@
 class Api::PicturesController < ApplicationController
 
     def create
-        picture = Picture.new(file => params[:file], caption => params[:caption])
-        binding.pry
-        if picture
-            picture.user = current_user
-            render json
-        else
-            render json: "Error"
-        end
+        @picture = Picture.new
+        current_user.pictures << @picture
+        @picture.save
+        @picture.image.attach(params[:image]) 
+        respond_to_picture()
     end
     
 
@@ -16,6 +13,11 @@ class Api::PicturesController < ApplicationController
     
     private
         def picture_params
-        params.require(:picture).permit(:email, :file, :caption)
+        params.require(:picture).permit(:email, :file, :caption, :image)
+        end
+
+        def respond_to_picture()
+            picture_serializer = PictureSerializer.new(picture: @picture)
+            render json: picture_serializer.serialize_new_picture()
         end
 end
