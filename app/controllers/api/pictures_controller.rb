@@ -3,9 +3,16 @@ class Api::PicturesController < ApplicationController
     def create
         @picture = Picture.new
         current_user.pictures << @picture
+        @picture.caption = params[:caption]
         @picture.save
         @picture.image.attach(params[:image]) 
-        respond_to_picture()
+        pictures = current_user.pictures
+        render json: PictureSerializer.new(pictures)
+    end
+
+    def userpictures
+        pictures = current_user.pictures
+        render json: PictureSerializer.new(pictures)
     end
     
 

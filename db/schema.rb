@@ -61,7 +61,6 @@ ActiveRecord::Schema.define(version: 2021_01_03_011235) do
 
   create_table "pictures", force: :cascade do |t|
     t.integer "user_id"
-    t.text "file"
     t.string "caption"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -72,6 +71,7 @@ ActiveRecord::Schema.define(version: 2021_01_03_011235) do
     t.string "username"
     t.string "email"
     t.string "bio"
+    t.string "authId"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

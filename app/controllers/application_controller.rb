@@ -8,11 +8,12 @@ class ApplicationController < ActionController::API
       
           def current_user
             if auth_token
-                @user = User.find_by(email: params[:email])
+                @user = User.find_by(authId: params[:id])
                 if @user
                   @user 
                 else
-                  @user = User.new(email: params[:email], username: params[:email])
+                  @user = User.new(authId: params[:id], email: params[:email], username: params[:email])
+                  binding.pry
                   @user.save
                   @user
                 end
