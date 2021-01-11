@@ -1,6 +1,6 @@
 class Api::PicturesController < ApplicationController
 
-    def create
+    def new
         @picture = Picture.new
         current_user.pictures << @picture
         @picture.caption = params[:caption]
@@ -20,7 +20,7 @@ class Api::PicturesController < ApplicationController
     
     private
         def picture_params
-        params.require(:picture).permit(:email, :file, :caption, :image)
+        params.require(:picture).permit(:id, :file, :caption, :image)
         end
 
         def respond_to_picture()

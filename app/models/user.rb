@@ -6,5 +6,4 @@ class User < ApplicationRecord
     has_many :pictures
 
     validates :username, uniqueness: { case_sensitive: true }
-    validates :username, presence: true
 end

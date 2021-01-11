@@ -13,5 +13,6 @@ Rails.application.routes.draw do
     post '/users/:id/unfollow', to: "users#unfollow", as: "unfollow_user"
     post '/users/login', to: "users#login", as: "login_user"
     get '/pictures/:id/userpictures', to:  'pictures#userpictures', as: "user_pictures"
+    post '/pictures/:id/new', to: 'pictures#new', as: "new_picture"
   end
 end

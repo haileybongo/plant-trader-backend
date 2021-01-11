@@ -12,8 +12,7 @@ class ApplicationController < ActionController::API
                 if @user
                   @user 
                 else
-                  @user = User.new(authId: params[:id], email: params[:email], username: params[:email])
-                  binding.pry
+                  @user = User.new(authId: params[:id])
                   @user.save
                   @user
                 end
