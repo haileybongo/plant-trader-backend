@@ -5,15 +5,16 @@ class Api::UsersController < ApplicationController
         user = User.new(user_params)
     end
 
-    def login
-      @user = User.find(email => params([:email])
-      if @user
-        render json: UserSerializer.new
-      else
-        @user = User.new(user_params)
-        render json: UserSerializer.new
+    def show
+      render json: UserSerializer.new(current_user)
     end
 
+    def update
+      current_user.bio = params[:bio]
+      current_user.username = params[:username]
+      current_user.save
+      render json: UserSerializer.new(current_user)
+    end
     
     def follow
         @user = User.find(params[:id])

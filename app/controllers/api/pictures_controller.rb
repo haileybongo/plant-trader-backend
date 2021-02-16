@@ -15,6 +15,14 @@ class Api::PicturesController < ApplicationController
         render json: PictureSerializer.new(pictures)
     end
     
+    def followpictures
+        followedpictures = []
+        Picture.all.for each (
+            if picture.user included in user.followpicture
+                followedpictures<< picture
+        )
+    end
+
 
 
     
@@ -23,8 +31,4 @@ class Api::PicturesController < ApplicationController
         params.require(:picture).permit(:id, :file, :caption, :image)
         end
 
-        def respond_to_picture()
-            picture_serializer = PictureSerializer.new(picture: @picture)
-            render json: picture_serializer.serialize_new_picture()
-        end
 end
