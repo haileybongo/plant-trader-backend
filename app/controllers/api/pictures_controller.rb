@@ -15,13 +15,7 @@ class Api::PicturesController < ApplicationController
         render json: PictureSerializer.new(pictures)
     end
     
-    def followpictures
-        followedpictures = []
-        Picture.all.for each (
-            if picture.user included in user.followpicture
-                followedpictures<< picture
-        )
-    end
+
 
 
 
@@ -32,3 +26,14 @@ class Api::PicturesController < ApplicationController
         end
 
 end
+
+=begin
+   def followpictures
+followedpictures = []
+Picture.all.for each (
+    if picture.user included in user.following_users
+        followedpictures<< picture
+)
+end
+
+=end
